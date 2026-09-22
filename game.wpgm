@@ -1,6 +1,8 @@
+import src.cultivos.*
 import wollok.game.*
-import personaje.*
-import cultivos.*
+import  granja.*
+
+
 
 program lagranja {
 	//  CONFIG	
@@ -10,7 +12,12 @@ program lagranja {
 	game.ground("fondo.png")
 
  	game.addVisualCharacter(personaje)
- 	
+
+	keyboard.g().onPressDo({ personaje.cambiarGenero() })
+    keyboard.m().onPressDo({ personaje.plantar(new Maiz()) })
+    keyboard.t().onPressDo({ personaje.plantar(new Trigo()) })
+    keyboard.o().onPressDo({ personaje.plantar(new Tomaco()) })
+	
 
  	//  COMIENZA
 	game.start()

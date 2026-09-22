@@ -1,9 +1,30 @@
 import wollok.game.*
 import granja.*
+import src.cultivos.*
+
 describe "test de la granja" {
-
-
-    test "personaje" {
-        assert.that(true)
-    }
+  test "personaje" {
+    personaje.genero(masculino)
+    assert.equals("m-player-normal.png", personaje.image())
+  }
+  
+  test "personajeF" {
+    personaje.genero(femenino)
+    assert.equals("f-player-normal.png", personaje.image())
+  }
+  
+  test "sembrar" {
+    granja.vaciar()
+    personaje.position(game.at(5, 5))
+    const unTomaco = new Tomaco()
+    personaje.plantar(unTomaco)
+    assert.equals(game.at(5, 5), unTomaco.position())
+    assert.equals(#{unTomaco}, granja.cultivos())
+    const trigardo = new Trigo()
+    assert.throwsException({ personaje.plantar(trigardo) })
+    personaje.position(game.at(6, 6))
+    personaje.plantar(trigardo)
+    assert.equals(game.at(6,6), trigardo.position())
+    assert.equals(#{unTomaco, trigardo}, granja.cultivos())
+  }
 }
