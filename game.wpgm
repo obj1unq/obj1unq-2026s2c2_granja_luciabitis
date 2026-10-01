@@ -12,11 +12,17 @@ program lagranja {
 	game.ground("fondo.png")
 
  	game.addVisualCharacter(personaje)
+	game.addVisual(mercado)
 
 	keyboard.g().onPressDo({ personaje.cambiarGenero() })
     keyboard.m().onPressDo({ personaje.plantar(new Maiz()) })
     keyboard.t().onPressDo({ personaje.plantar(new Trigo()) })
     keyboard.o().onPressDo({ personaje.plantar(new Tomaco()) })
+	keyboard.r().onPressDo({personaje.regar()})
+	keyboard.c().onPressDo({personaje.cosechar()})
+	keyboard.space().onPressDo( { personaje.infoSobreLaVenta() } )
+
+	game.onCollideDo(personaje, {algoColisionado => algoColisionado.interactuar(personaje)})
 	
 
  	//  COMIENZA
